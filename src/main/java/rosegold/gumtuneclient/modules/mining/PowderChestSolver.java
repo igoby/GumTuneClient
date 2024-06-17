@@ -5,6 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.network.play.server.S2APacketParticles;
 import net.minecraft.util.*;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -28,9 +29,8 @@ public class PowderChestSolver {
     public static final ArrayList<BlockPos> solved = new ArrayList<>();
 
     @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
+    public void onRenderTick(RenderWorldLastEvent event) {
         if (!isEnabled()) return;
-        if (event.phase == TickEvent.Phase.END) return;
         if (closestChest == null) {
             particle = null;
             if (!GumTuneClientConfig.powderChestSolverLegitMode) {
@@ -46,11 +46,13 @@ public class PowderChestSolver {
         }
 
         if (closestChest != null) {
+            BlockPos blockPos = GumTuneClient.mc.objectMouseOver.getBlockPos();
             if (GumTuneClient.mc.thePlayer.getPositionEyes(1f).distanceTo(new Vec3(
                     closestChest.getX() + 0.5,
                     closestChest.getY() + 0.5,
                     closestChest.getZ() + 0.5)
-            ) >  4 || !isPowderChest(closestChest)) {
+            ) >  4 || !isPowderChest(closestChest)
+                    || !(GumTuneClient.mc.objectMouseOver != null && GumTuneClient.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && GumTuneClient.mc.theWorld.getBlockState(blockPos).getBlock() == Blocks.chest)) {
                 closestChest = null;
                 particle = null;
             }
@@ -121,6 +123,13 @@ public class PowderChestSolver {
 
     @SubscribeEvent
     public void clear(WorldEvent.Unload event) {
+        solved.clear();
+        particle = null;
+        closestChest = null;
+    }
+
+    @SubscribeEvent
+    public void clearA(GuiOpenEvent event) {
         solved.clear();
         particle = null;
         closestChest = null;
