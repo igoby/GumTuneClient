@@ -23,7 +23,6 @@ import rosegold.gumtuneclient.events.MillisecondEvent;
 import rosegold.gumtuneclient.events.PlayerMoveEvent;
 import rosegold.gumtuneclient.events.SecondEvent;
 import rosegold.gumtuneclient.modules.macro.GemstoneMacro;
-import rosegold.gumtuneclient.modules.render.ESPs;
 import rosegold.gumtuneclient.utils.*;
 
 import java.awt.*;
@@ -49,13 +48,6 @@ public class Nuker {
             enabled = !enabled;
             ModUtils.sendMessage((enabled ? "Enabled" : "Disabled") + " Nuker");
             if (enabled) {
-                if (NukerBlockFilter.nukerBlockFilterFrozenTreasure) {
-                    if (GumTuneClientConfig.frozenTreasureESP) {
-                        ModUtils.sendMessage("&cIf nuker doesn't work for frozen treasures, try disabling entity culling in patcher!");
-                    } else {
-                        ModUtils.sendMessage("&cEnable frozen treasure ESP for frozen treasure nuker to work!");
-                    }
-                }
                 if (GumTuneClientConfig.nukerShape == 2 && (NukerBlockFilter.nukerBlockFilterHardstone || NukerBlockFilter.nukerBlockFilterStone) && !GumTuneClientConfig.phaseCameraThroughBlocks) {
                     ModUtils.sendMessage("&cRecommended to turn on Phase Camera Through Blocks when using tunnel shape and hardstone filter!");
                 }
@@ -444,13 +436,6 @@ public class Nuker {
         if (NukerBlockFilter.nukerBlockFilterIce &&
                 block == Blocks.ice) return true;
 
-        if (NukerBlockFilter.nukerBlockFilterFrozenTreasure &&
-                LocationUtils.currentIsland == LocationUtils.Island.JERRY_WORKSHOP &&
-                ESPs.frozenTreasures.contains(bp)) {
-            ESPs.frozenTreasures.remove(bp);
-            ESPs.checked.clear(); // make nuker faster
-            return true;
-        }
 
         return NukerBlockFilter.nukerBlockFilterNetherrack &&
                 block == Blocks.netherrack;

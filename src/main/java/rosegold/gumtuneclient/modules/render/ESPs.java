@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import rosegold.gumtuneclient.GumTuneClient;
 import rosegold.gumtuneclient.config.GumTuneClientConfig;
-import rosegold.gumtuneclient.config.pages.FrozenTreasureFilter;
 import rosegold.gumtuneclient.config.pages.RiftESPs;
 import rosegold.gumtuneclient.events.PacketReceivedEvent;
 import rosegold.gumtuneclient.events.RenderLivingEntityEvent;
@@ -132,16 +131,6 @@ public class ESPs {
                         }
                     }
                     break;
-                case JERRY_WORKSHOP:
-                    if (GumTuneClientConfig.frozenTreasureESP && isFrozenTreasure((EntityArmorStand) event.entity)) {
-                        BlockPos blockPos = new BlockPos(event.entity.posX, event.entity.posY + 2, event.entity.posZ);
-                        if (GumTuneClient.mc.theWorld.getBlockState(blockPos).getBlock() == Blocks.ice ||
-                                GumTuneClient.mc.theWorld.getBlockState(blockPos).getBlock() == Blocks.packed_ice) {
-                            frozenTreasures.add(blockPos);
-                            highlightBlock(blockPos, event.entity, event.entity.getCurrentArmor(3).serializeNBT().getCompoundTag("tag").getCompoundTag("display").getTag("Name").toString().replace("\"", ""));
-                        }
-                    }
-                    break;
                 case THE_RIFT:
                     if (RiftESPs.shyESP && matchSkullTexture((EntityArmorStand) event.entity, SHY_TEXTURES)) {
                         highlightEntity(event.entity, "§2Shy", new Color(0, 140, 0).getRGB());
@@ -200,7 +189,7 @@ public class ESPs {
                 if (name.equals("Team Treasurite")) {
                     highlightEntity(event.entity, "Team Treasurite", Color.CYAN.getRGB());
                 } else if (name.equals("Murderlover") || name.equals("Goblin") || name.equals("Weakling") || name.equals("Pitfighter")) {
-                    highlightEntity(event.entity, "Goblin", new Color(0, 100, 0).getRGB());
+                    highlightEntity(event.entity, "Goblin", Color.ORANGE.getRGB());
                 }
             } else if (event.entity instanceof EntityIronGolem) {
                 highlightEntity(event.entity, "Automaton", Color.WHITE.getRGB());
@@ -282,26 +271,6 @@ public class ESPs {
 
     private boolean isArachneKeeper(Entity entity) {
         return entity.getCustomNameTag().contains("Keeper") && LocationUtils.currentIsland == LocationUtils.Island.SPIDER_DEN;
-    }
-
-    private boolean isFrozenTreasure(EntityArmorStand entity) {
-        ItemStack itemStack = entity.getCurrentArmor(3);
-        if (itemStack != null && itemStack.serializeNBT().getCompoundTag("tag") != null &&
-                itemStack.serializeNBT().getCompoundTag("tag").getCompoundTag("display") != null &&
-                itemStack.serializeNBT().getCompoundTag("tag").getCompoundTag("display").getTag("Name") != null) {
-            String name = itemStack.serializeNBT().getCompoundTag("tag").getCompoundTag("display").getTag("Name").toString().replace("\"", "");
-            return name.contains("Packed Ice") && FrozenTreasureFilter.frozenTreasurePackedIce ||
-                    name.contains("Enchanted Ice") && FrozenTreasureFilter.frozenTreasureEnchantedIce ||
-                    name.contains("Enchanted Packed Ice") && FrozenTreasureFilter.frozenTreasureEnchantedPackedIce ||
-                    name.contains("Ice Bait") && FrozenTreasureFilter.frozenTreasureIceBait ||
-                    name.contains("Glowy Chum Bait") && FrozenTreasureFilter.frozenTreasureGlowyChumBait ||
-                    name.contains("Glacial Fragment") && FrozenTreasureFilter.frozenTreasureGlacialFragment ||
-                    name.contains("White Gift") && FrozenTreasureFilter.frozenTreasureWhiteGift ||
-                    name.contains("Green Gift") && FrozenTreasureFilter.frozenTreasureGreenGift ||
-                    name.contains("Red Gift") && FrozenTreasureFilter.frozenTreasureRedGift ||
-                    name.contains("Glacial Talisman") && FrozenTreasureFilter.frozenTreasureGlacialTalisman;
-        }
-        return false;
     }
 
     private boolean matchSkullTexture(EntityArmorStand entity, String... skullTextures) {

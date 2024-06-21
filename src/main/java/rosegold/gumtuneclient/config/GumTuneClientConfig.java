@@ -525,13 +525,6 @@ public class GumTuneClientConfig extends Config {
     public static boolean arachneKeeperESP = false;
 
     @Switch(
-            name = "Frozen Treasure ESP",
-            category = RENDER,
-            subcategory = ESPS
-    )
-    public static boolean frozenTreasureESP = false;
-
-    @Switch(
             name = "Fairy Soul ESP",
             category = RENDER,
             subcategory = ESPS
@@ -577,14 +570,6 @@ public class GumTuneClientConfig extends Config {
     )
     public static boolean entityRenderWaypoint = false;
 
-    @Page(
-            name = "Frozen Treasure Filters",
-            description = "Filter out treasures for the ESP",
-            category = RENDER,
-            subcategory = ESPS,
-            location = PageLocation.BOTTOM
-    )
-    public FrozenTreasureFilter frozenTreasureFilter = new FrozenTreasureFilter();
 
     @Switch(
             name = "Reveal Hidden Mobs",

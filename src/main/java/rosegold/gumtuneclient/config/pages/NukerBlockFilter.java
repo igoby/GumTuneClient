@@ -106,9 +106,4 @@ public class NukerBlockFilter {
     )
     public static boolean nukerBlockFilterIce = false;
 
-    @Switch(
-            name = "Frozen Treasure",
-            description = "Frozen Treasure"
-    )
-    public static boolean nukerBlockFilterFrozenTreasure = false;
 }
