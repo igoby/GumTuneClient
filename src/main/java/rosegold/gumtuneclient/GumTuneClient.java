@@ -86,7 +86,6 @@ public class GumTuneClient {
                 new WorldScanner(),
                 new PathFinding(),
                 new AspectOfTheVoid(),
-                new MetalDetectorSolver(),
                 new AvoidBreakingCrops(),
                 new AutoSell(),
                 new FairySoulAura(),

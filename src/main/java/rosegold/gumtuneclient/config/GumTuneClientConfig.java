@@ -52,7 +52,6 @@ public class GumTuneClientConfig extends Config {
     private transient static final String SERVER_SIDE_ROTATIONS = "Server Side Rotations";
     private transient static final String CAMERA = "Camera";
     private transient static final String WORLD_SCANNER = "World Scanner";
-    private transient static final String METAL_DETECTOR_SOLVER = "Metal Detector Solver";
     private transient static final String MOBX_DRILL = "Mobx Drill";
     private transient static final String AUTO_SELL = "Auto Sell";
     private transient static final String BLOCK_HITBOXES = "Block Hitboxes";
@@ -287,37 +286,6 @@ public class GumTuneClientConfig extends Config {
     )
     public static int powderChestPauseNukerMode = 0;
 
-    @Switch(
-            name = "Metal Detector Solver",
-            category = MINING,
-            subcategory = METAL_DETECTOR_SOLVER,
-            size = 2
-    )
-    public static boolean metalDetectorSolver = false;
-
-    @Switch(
-            name = "Show All Spots",
-            description = "Show all possible spots for divan treasures",
-            category = MINING,
-            subcategory = METAL_DETECTOR_SOLVER
-    )
-    public static boolean metalDetectorSolverShowAllSpots = false;
-
-    @Switch(
-            name = "Tracer",
-            description = "Draw a tracer to solved treasure",
-            category = MINING,
-            subcategory = METAL_DETECTOR_SOLVER
-    )
-    public static boolean metalDetectorSolverTracer = false;
-
-    @Switch(
-            name = "Calculate Path",
-            description = "Calculate and render path to chest",
-            category = MINING,
-            subcategory = METAL_DETECTOR_SOLVER
-    )
-    public static boolean metalDetectorCalculatePath = false;
 
     @Switch(
             name = "Prevent Cancelling Mining Progress",
