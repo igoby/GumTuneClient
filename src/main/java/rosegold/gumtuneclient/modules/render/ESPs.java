@@ -188,8 +188,8 @@ public class ESPs {
                 String name = event.entity.getName();
                 if (name.equals("Team Treasurite")) {
                     highlightEntity(event.entity, "Team Treasurite", Color.CYAN.getRGB());
-                } else if (name.equals("Murderlover") || name.equals("Goblin") || name.equals("Weakling") || name.equals("Pitfighter")) {
-                    highlightEntity(event.entity, "Goblin", Color.ORANGE.getRGB());
+                } else if (name.contains("Goblin") || name.contains("Weakling") || name.contains("Pitfighter") || name.contains("Murderlover") || name.contains("Creeperlobber")) {
+                    highlightEntity(event.entity, "Goblin", new Color(0, 100, 0).getRGB());
                 }
             } else if (event.entity instanceof EntityIronGolem) {
                 highlightEntity(event.entity, "Automaton", Color.WHITE.getRGB());

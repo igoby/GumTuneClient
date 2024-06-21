@@ -30,7 +30,6 @@ import rosegold.gumtuneclient.modules.macro.AutoHarp;
 import rosegold.gumtuneclient.modules.macro.GemstoneMacro;
 import rosegold.gumtuneclient.modules.macro.MobMacro;
 import rosegold.gumtuneclient.modules.mining.GemstoneSackCompactor;
-import rosegold.gumtuneclient.modules.mining.MetalDetectorSolver;
 import rosegold.gumtuneclient.modules.mining.Nuker;
 import rosegold.gumtuneclient.modules.mining.PowderChestSolver;
 import rosegold.gumtuneclient.modules.player.*;
@@ -47,7 +46,6 @@ import rosegold.gumtuneclient.utils.*;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
